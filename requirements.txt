@@ -1,0 +1,7 @@
+streamlit
+ipywidgets
+os
+sys
+numpy
+segyio 
+matplotlib
