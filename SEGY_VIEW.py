@@ -14,18 +14,18 @@ url = "https://drive.google.com/drive/folders/1FPe7tuvOthk0__yzZsXhWevjPucsS5lF?
 # st.write("check out this [link](%s)" % url)
 st.markdown(" [link](%s) for sample data " % url)
 st.write('Ignore the error')
-# if filepath_in is None:
-#   filepath_in = ""
-# else:
-#   filepath_in = filepath_in.name
-  
-#   st.write(f"You uploaded: {filepath_in}")
-  
-if filepath_in is not None:
-    filepath_in = filepath_in.name
-    print(filepath_in)
+if filepath_in is None:
+  filepath_in = ""
 else:
-    filepath_in = None
+  filepath_in = filepath_in.name
+  
+  st.write(f"You uploaded: {filepath_in}")
+  
+# if filepath_in is not None:
+#     filepath_in = filepath_in.name
+#     print(filepath_in)
+# else:
+#     filepath_in = None
 
 # # def identify_seismic_data_parameters(filepath_in):
 data_type='' 
