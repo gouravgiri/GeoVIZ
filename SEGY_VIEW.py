@@ -25,7 +25,7 @@ if filepath_in is not None:
     filepath_in = filepath_in.name
     print(filepath_in)
 else:
-    filepath_in = None
+    filepath_in = ""
 
 # # def identify_seismic_data_parameters(filepath_in):
 data_type='' 
