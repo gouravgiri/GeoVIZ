@@ -11,7 +11,7 @@ st.title('DEMO1')
 filepath_in = st.file_uploader("UPLOAD YOUR SEGY FILE", accept_multiple_files=False, type=None)
 
 url = "https://drive.google.com/drive/folders/1FPe7tuvOthk0__yzZsXhWevjPucsS5lF?usp=sharing"
-st.write("check out this [link](%s)" % url)
+# st.write("check out this [link](%s)" % url)
 st.markdown(" [link](%s) for sample data " % url)
 st.write('Ignore the error')
 if filepath_in is None:
