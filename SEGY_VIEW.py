@@ -7,7 +7,7 @@ import numpy as np
 import segyio 
 from matplotlib import pyplot as plt
 st.header('SEGY VIEWER')
-st.title('DEMO')
+st.title('DEMO1')
 filepath_in = st.file_uploader("UPLOAD YOUR SEGY FILE", accept_multiple_files=False, type=None)
 
 url = "https://drive.google.com/drive/folders/1FPe7tuvOthk0__yzZsXhWevjPucsS5lF?usp=sharing"
