@@ -1,6 +1,5 @@
 streamlit
 ipywidgets
-sys
 numpy
 segyio 
 matplotlib
