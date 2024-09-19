@@ -109,14 +109,14 @@ def plot(well_data):
 def main():
     global columns
 
-    st.set_page_config(page_title="Formation Evaluation and SEGY Viewer", layout="wide")
+    st.set_page_config(page_title="GeoVIZ", layout="wide")
 
     # Custom CSS to improve aesthetics
     st.markdown("""
         <style>
         .main {
             background-color: #f0f0f0;
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
@@ -142,7 +142,7 @@ def main():
     """, unsafe_allow_html=True)
 
     # Title and Subtitle
-    st.markdown("<h1 style='text-align: center;'>Formation Evaluation and SEGY Viewer</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>GeoVIZ</h1>", unsafe_allow_html=True)
     st.markdown("<h2 style='text-align: center;'>Analyze LAS and SEGY data with ease!</h2>", unsafe_allow_html=True)
 
     # Data Type Selection
