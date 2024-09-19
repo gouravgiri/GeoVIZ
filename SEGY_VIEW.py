@@ -169,7 +169,8 @@ def main():
         # Tabs for different sections
         
         t1, t2, t3 = st.tabs(['DATA LOADING', 'FORMATION EVALUATION', 'VISUALISATION'])
-        
+        url = "https://drive.google.com/drive/folders/1FPe7tuvOthk0__yzZsXhWevjPucsS5lF?usp=sharing"
+        st.markdown("[LINK](%s) for small size 2D well log data" % url)
         with t1:
             uploaded_file = st.file_uploader("Upload a LAS file", type=["las", "LAS"])
             
@@ -193,6 +194,7 @@ def main():
         with t2:
             if uploaded_file is not None and 'GR' in well_df.columns and 'DEPT' in well_df.columns:
                 st.title("Vshale Plot")
+                st.write("Only Volume of Shale calculation is Available")
                 gammaray = well_df['GR']
                 c1, c2 = st.columns(2)
                 max_val_per = c2.text_input("Percentile for max GR:", value="95")
@@ -221,7 +223,7 @@ def main():
                 else:
                     st.write("Invalid input. Please enter valid percentile values (0-100).")
             else:
-                st.write("GR or DEPT column missing in the data.")
+                st.write("GR (gamma ray) or DEPT (depth) column missing in the data.")
         
         with t3:
             if uploaded_file is not None:
@@ -239,7 +241,7 @@ def main():
 
         # Provide link to sample data
         url = "https://drive.google.com/drive/folders/1FPe7tuvOthk0__yzZsXhWevjPucsS5lF?usp=sharing"
-        st.markdown("[LINK](%s) for small sie 2D sample data" % url)
+        st.markdown("[LINK](%s) for small size 2D sample data" % url)
 
         # Check if a file is uploaded
         if filepath_in is None:
