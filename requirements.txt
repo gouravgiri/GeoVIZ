@@ -3,5 +3,3 @@ ipywidgets
 numpy
 segyio 
 matplotlib
-os
-sys
