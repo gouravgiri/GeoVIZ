@@ -96,14 +96,14 @@ else:
 
     except FileNotFoundError:
         st.write("Error: File not found or unsupported data format.")
-        return
+        st.stop()
 
     # Reshape seismic data to the corresponding format
     try:
         inline, cdp, samples = seismic_data.shape
     except:
         st.write("Error: Data was not loaded successfully due to unsupported data format or invalid inline and crossline byte locations.")
-        return
+        st.stop()
 
     # Display data based on type
     if data_type == 'Post-stack 2D':
@@ -180,9 +180,9 @@ else:
         st.pyplot(plt.gcf())
 
         mid_twt = len(twt) // 2
-        TWT = st.slider('Choose time', min_value=twt[0], max_value=twt[-1], step=sample_rate, value=twt[mid_twt])
-        Time_ms = int((TWT - twt[0]) / sample_rate)
-        seismic_data_time = data_display[Time_ms, :, :]
+        Time = st.slider('Choose Time (ms)', min_value=int(twt[0]), max_value=int(twt[-1]), step=int(sample_rate), value=int(twt[mid_twt]))
+        Time_slice = int((Time - twt[0]) / sample_rate)
+        seismic_data_time = data_display[Time_slice, :, :]
         plt.clf()
         plot(seismic_data_time, direction='time-slice', segy='seismic')
         st.pyplot(plt.gcf())
