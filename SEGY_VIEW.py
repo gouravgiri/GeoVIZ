@@ -142,7 +142,7 @@ def main():
     """, unsafe_allow_html=True)
 
     # Title and Subtitle
-    st.markdown("<h1 style='text-align: center;'>GeoVIZ</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;font-size: 4em;'>GeoVIZ</h1>", unsafe_allow_html=True)
     st.markdown("<h2 style='text-align: center;'>Analyze LAS and SEGY data with ease!</h2>", unsafe_allow_html=True)
 
     # Data Type Selection
