@@ -3,3 +3,7 @@ ipywidgets
 numpy
 segyio 
 matplotlib
+pandas
+lasio
+plotly
+
