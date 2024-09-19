@@ -11,6 +11,8 @@ from PIL import Image
 import requests
 from io import BytesIO
 
+
+
 ###  NEEDED FOR LAS  ###
 
 columns = []
@@ -105,18 +107,68 @@ def plot(well_data):
 
 
 def main():
-    global columns  # Use global keyword to modify the global variable
-    
-    st.title('Formation Evaluation and SEGY Viewer')
-    title = st.text_input('Life of Brian')
-    
-    # Fetch and display image
-    data_type = st.radio('Select Data Type', ('LAS', 'SEGY'))
+    global columns
 
-    if data_type == 'LAS':
-        st.write('its las')
+    st.set_page_config(page_title="Formation Evaluation and SEGY Viewer", layout="wide")
+
+    # Custom CSS to improve aesthetics
+    st.markdown("""
+        <style>
+        .main {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2a9d8f;
+        }
+        h2 {
+            color: #264653;
+        }
+        .option-box {
+            background-color: #2a9d8f;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .option-box:hover {
+            background-color: #21867b;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # Title and Subtitle
+    st.markdown("<h1 style='text-align: center;'>Formation Evaluation and SEGY Viewer</h1>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center;'>Analyze LAS and SEGY data with ease!</h2>", unsafe_allow_html=True)
+
+    # Data Type Selection
+    st.markdown("<h3 style='text-align: center;'>Select Data Type</h3>", unsafe_allow_html=True)
+    data_type = st.selectbox('', ('WELL LOG DATA', 'SEISMIC DATA'))
+    
+    # Create colored boxes for options
+    col1, col2 = st.columns(2)
+    
+    # with col1:
+    #     if st.button('LAS', key='las_option', help='Load and analyze LAS data'):
+    #         data_type = 'LAS'
+            
+    # with col2:
+    #     if st.button('SEGY', key='segy_option', help='Load and visualize SEGY data'):
+    #         data_type = 'SEGY'
+
+    st.write('You have selected:', data_type)
+
+    # Tabs for different sections with improved styling
+
+    if data_type == 'WELL LOG DATA':
+        st.title('WELL LOG VIEWER')
         # Tabs for different sections
-        t1, t2, t3 = st.tabs(['Data Loading', 'Formation Evaluation', 'Visualization'])
+        
+        t1, t2, t3 = st.tabs(['DATA LOADING', 'FORMATION EVALUATION', 'VISUALISATION'])
         
         with t1:
             uploaded_file = st.file_uploader("Upload a LAS file", type=["las", "LAS"])
@@ -178,17 +230,16 @@ def main():
                 st.write("Please upload a LAS file first.")
 
 
-    elif data_type == 'SEGY':
-        st.write('its sgy')
-        st.header('SEGY VIEWER')
-        st.title('DEMO1')
+    elif data_type == 'SEISMIC DATA':
+        st.title('SEGY VIEWER')
+        
 
         # File uploader for SEGY file
         filepath_in = st.file_uploader("UPLOAD YOUR SEGY FILE", accept_multiple_files=False, type=None)
 
         # Provide link to sample data
         url = "https://drive.google.com/drive/folders/1FPe7tuvOthk0__yzZsXhWevjPucsS5lF?usp=sharing"
-        st.markdown("[link](%s) for sample data" % url)
+        st.markdown("[LINK](%s) for small sie 2D sample data" % url)
 
         # Check if a file is uploaded
         if filepath_in is None:
@@ -306,7 +357,7 @@ def main():
                 st.write(f'Seismic Data Shape (Time sample, crossline number, inline number): {data_display.shape}')
 
             # Function to plot seismic data
-            def plot(seismic_data, direction=None, segy='seismic'):
+            def plot1(seismic_data, direction=None, segy='seismic'):
                 color = plt.cm.seismic if segy == 'seismic' else plt.cm.jet
                 if direction == 'inline':
                     extent = (np.min(xline_number), np.max(xline_number), np.max(twt), np.min(twt))
@@ -336,7 +387,7 @@ def main():
 
             # Plot based on data type
             if data_type == 'Post-stack 2D':
-                plot(data_display, direction='2D Line', segy='seismic')
+                plot1(data_display, direction='2D Line', segy='seismic')
                 st.pyplot(plt.gcf())
 
             if data_type == 'Post-stack 3D':
@@ -345,7 +396,7 @@ def main():
                 Iline = int((Inline - inline_number[0]) / diff_inline)
                 seismic_data_inline = data_display[:, :, Iline]
                 plt.clf()
-                plot(seismic_data_inline, direction='inline', segy='seismic')
+                plot1(seismic_data_inline, direction='inline', segy='seismic')
                 st.pyplot(plt.gcf())
 
                 mid_xline = len(xline_number) // 2
@@ -353,7 +404,7 @@ def main():
                 Xline = int((Crossline - xline_number[0]) / diff_xline)
                 seismic_data_xline = data_display[:, Xline, :]
                 plt.clf()
-                plot(seismic_data_xline, direction='xline', segy='seismic')
+                plot1(seismic_data_xline, direction='xline', segy='seismic')
                 st.pyplot(plt.gcf())
 
                 mid_twt = len(twt) // 2
@@ -361,7 +412,7 @@ def main():
                 Time_slice = int((Time - twt[0]) / sample_rate)
                 seismic_data_time = data_display[Time_slice, :, :]
                 plt.clf()
-                plot(seismic_data_time, direction='time-slice', segy='seismic')
+                plot1(seismic_data_time, direction='time-slice', segy='seismic')
                 st.pyplot(plt.gcf())
 
         #working good but onlt sample_2d.sgy no 3d
