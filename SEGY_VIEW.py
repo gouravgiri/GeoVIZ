@@ -115,7 +115,7 @@ def main():
     st.markdown("""
         <style>
         .main {
-            background-color: #f0f0f0;
+            background: linear-gradient(to bottom, #ffffff 0%, #ccccff 100%);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
