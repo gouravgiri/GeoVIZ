@@ -170,7 +170,7 @@ def main():
         
         t1, t2, t3 = st.tabs(['DATA LOADING', 'FORMATION EVALUATION', 'VISUALISATION'])
         url = "https://drive.google.com/drive/folders/1FPe7tuvOthk0__yzZsXhWevjPucsS5lF?usp=sharing"
-        st.markdown("[LINK](%s) for small size 2D well log data" % url)
+        st.markdown("[LINK](%s) for small size well log data" % url)
         with t1:
             uploaded_file = st.file_uploader("Upload a LAS file", type=["las", "LAS"])
             
